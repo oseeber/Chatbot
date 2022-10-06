@@ -2,6 +2,7 @@
 #define CHATGUI_H_
 
 #include <wx/wx.h>
+#include <memory> //including the memory standard
 
 class ChatLogic; // forward declaration
 
@@ -16,8 +17,8 @@ private:
     //// STUDENT CODE
     ////
 
-    ChatLogic *_chatLogic;
-
+    //ChatLogic *_chatLogic;
+    std::unique_ptr _chatlogic;
     ////
     //// EOF STUDENT CODE
 
