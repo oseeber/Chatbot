@@ -41,11 +41,11 @@ ChatLogic::~ChatLogic()
         //delete *it;
     //}
 
-    // delete all edges
-    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-    {
-        delete *it;
-    }
+    // delete all edges - commenting out because ownership is changed
+    // for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
+    // {
+    //     delete *it;
+    // }
 
     ////
     //// EOF STUDENT CODE
@@ -160,10 +160,10 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             auto childNode = std::find_if(_nodes.begin(), _nodes.end(), [&childToken](std::unique_ptr<GraphNode> &node) { return node->GetID() == std::stoi(childToken->second); });
 
                             // create new edge
-                            std::unique_ptr<GraphEdge> = new GraphEdge(id); //changing to create a smart pointer
+                            std::unique_ptr<GraphEdge> edge = std::make_unique<GraphEdge>(id); //changing to create a smart pointer
                             edge->SetChildNode((*childNode).get());
                             edge->SetParentNode((*parentNode).get());
-                            _edges.push_back(edge);
+                            //_edges.push_back(edge); - moving edges a few lines down
 
                             // find all keywords for current node
                             AddAllTokensToElement("KEYWORD", tokens, *edge);

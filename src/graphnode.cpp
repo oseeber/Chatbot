@@ -29,7 +29,7 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
 
 void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
-    _childEdges.push_back(edge);
+    _childEdges.push_back(std::move(edge)); //believe we need move semantics here or else we are making an illegal copy
 }
 
 //// STUDENT CODE
@@ -53,7 +53,8 @@ GraphEdge *GraphNode::GetChildEdgeAtIndex(int index)
     //// STUDENT CODE
     ////
 
-    return _childEdges[index];
+    return _childEdges[index].get();//need to get raw pointer to agree w/ return type
+
 
     ////
     //// EOF STUDENT CODE
