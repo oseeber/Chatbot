@@ -54,6 +54,7 @@ ChatBot::ChatBot(ChatBot &&source) {
 
     _chatLogic = source._chatLogic;
     source._chatLogic = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 
     _rootNode = source._rootNode;
     source._rootNode = nullptr;
