@@ -94,7 +94,7 @@ ChatBot &ChatBot::operator=(ChatBot &&source) {
 
 //copy constructor
 ChatBot::ChatBot(const ChatBot &source) {
-    std::out << "Chatbot copy constructor" <<std::endl;
+    std::cout << "Chatbot copy constructor" <<std::endl;
 
     _chatLogic = source._chatLogic;
     _rootNode = source._rootNode;
