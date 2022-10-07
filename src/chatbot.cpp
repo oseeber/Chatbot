@@ -45,6 +45,91 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+//move constructor
+ChatBot::ChatBot(ChatBot &&source) {
+    std::cout << "ChatBot move constructor" <<std::endl;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    _chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _image = source._image;
+    source._image = NULL;
+
+}
+
+//move assignment operator
+ChatBot &ChatBot::operator=(ChatBot &&source) {
+    std::cout << "Chtbot move assignment operator" <<std::endl;
+
+    if (this != &source) {
+        _chatLogic = nullptr;
+        _chatLogic = source._chatLogic;
+        source._chatLogic = nullptr;
+
+        _chatLogic->SetChatbotHandle(this);
+
+        _rootNode = nullptr;
+        _rootNode = source._rootNode;
+        source._rootNode = nullptr;
+
+        _currentNode = nullptr;
+        _currentNode = source._currentNode;
+        source._currentNode = nullptr;
+
+        if (_image!= NULL) {
+            delete _image;
+            _image = NULL;
+        }
+        _image = source._image;
+        source._image = NULL;
+    }
+    return *this;
+}
+
+//copy constructor
+ChatBot::ChatBot(const ChatBot &source) {
+    std::out << "Chatbot copy constructor" <<std::endl;
+
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+
+    _image = new wxBitmap();
+    *_image = *source._image;
+}
+
+//copy assignment operator
+ChatBot &ChatBot::operator=(const ChatBot &source) {
+    std::cout << "Chatbot copy assignment operator" <<std::endl;
+
+    if (this != &source) {
+        _chatLogic = nullptr;
+        _chatLogic = source._chatLogic;
+
+        _rootNode = nullptr;
+        _rootNode = source._rootNode;
+
+        _currentNode = nullptr;
+        _currentNode = source._currentNode;
+
+        if (_image != NULL) {
+            delete _image;
+            _image = NULL;
+        }
+
+        _image = new wxBitmap();
+        *_image = *source._image;
+
+    }
+    return *this;
+}
+
 ////
 //// EOF STUDENT CODE
 
