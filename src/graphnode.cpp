@@ -36,13 +36,13 @@ void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 ////
 void GraphNode::MoveChatbotHere(ChatBot *chatbot)
 {
-    _chatBot = chatbot;
+    _chatBot = std::move(chatbot);//move semantics so we don't make a copy
     _chatBot->SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode)
 {
-    newNode->MoveChatbotHere(_chatBot);
+    newNode->MoveChatbotHere(std::move(_chatBot));//move semantics so we aren't making a copy
     _chatBot = nullptr; // invalidate pointer at source
 }
 ////
